@@ -634,3 +634,40 @@ def decode_text(
     return "".join(
         decoded
     ).strip()
+if __name__ == "__main__":
+
+    from pathlib import Path
+
+    project_root = Path(__file__).resolve().parents[1]
+    text_dir = project_root / "data" / "text"
+
+    images = sorted(text_dir.glob("*.bmp"))
+
+    if not images:
+        raise RuntimeError("No BMP images found.")
+
+    print()
+    print("=" * 70)
+    print("METHOD 1 - 16-SEGMENT DISPLAY DECODER")
+    print("=" * 70)
+    print()
+    print(f"Total images: {len(images)}")
+    print()
+
+    for index, image_path in enumerate(images, start=1):
+
+        image = cv2.imread(str(image_path))
+
+        if image is None:
+            print(
+                f"Frame {index:03d}: "
+                "ERROR - could not read image"
+            )
+            continue
+
+        text = decode_text(image)
+
+        print(
+            f"Frame {index:03d}: "
+            f"{text}"
+        )

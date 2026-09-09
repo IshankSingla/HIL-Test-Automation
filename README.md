@@ -381,7 +381,7 @@ pip install -r requirements.txt
 From the project root:
 
 ```bash
-python src\main.py
+python -m src.main
 ```
 
 This performs gauge calibration, detects the needle angle, calculates the gauge value, and saves annotated output images.
